@@ -7,7 +7,7 @@ import { useGetPosts, useSearchPosts } from '@/lib/react-query/queriesAndMutatio
 import { useState } from 'react'
 
 const Explore = () => {
-  const {data:posts, fetchNextPage: hasNextPage} = useGetPosts();
+  const {data:posts} = useGetPosts();
 
   const [searchValue, setSearchValue] = useState('')
   const debouncedValue = useDebounce(searchValue, 500);
@@ -50,7 +50,7 @@ const Explore = () => {
         ):posts.pages.map((item, index) =>(
           <GridPostList key={`page-${index}`} posts={item.documents} />
         )
-         
+       
         )}
       </div>
     </div>

@@ -10,22 +10,21 @@ import { Button } from "@/components/ui/button";
 import { useForm } from "react-hook-form";
 import Loader from "@/components/shared/Loader";
 import { Link, useNavigate } from "react-router-dom";
-import { createUserAccount } from "@/lib/appwrite/api";
+
 import { useCreateUserAccount, useSignInAccount } from "@/lib/react-query/queriesAndMutations";
 import { useUserContext } from "@/context/AuthContext";
-import { databases } from "@/lib/appwrite/config";
-import { ID } from "appwrite";
+
 
 
 
 const SignupForm = () => {
   const { toast } = useToast();
-  const {checkAuthUser, isLoading: isUserLoading} = useUserContext();
+  const {checkAuthUser} = useUserContext();
   const navigate = useNavigate();
 
   const {mutateAsync: createUserAccount, isPending: isCreatingUser} = useCreateUserAccount();
 
-  const {mutateAsync: signInAccount, isPending: isSigningin} = useSignInAccount();
+  const {mutateAsync: signInAccount} = useSignInAccount();
 // 1. Define your form.
   const form = useForm<z.infer<typeof SignupValidation>>({
     resolver: zodResolver(SignupValidation),
